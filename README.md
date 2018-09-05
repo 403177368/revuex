@@ -2,6 +2,8 @@
 
 Revuex is a state manager based upon redux and inspired by vuex. You can manipulate state of your react/redux app in the vuex-like way.
 
+## What's wrong with redux?
+
 ## What Problems Revuex Solved?
 
 The switch-case-in-reducer pattern is vulnerable because all the code inside a switch block share a same scope.
