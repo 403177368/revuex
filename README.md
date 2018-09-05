@@ -18,7 +18,7 @@ npm install revuex
 
 ## Usage
 
-Check the detailed [example](https://github.com/403177368/all/tree/master/packages/revuex/example/).
+Check the detailed [example](./example/).
 
 ## Terminology
 
