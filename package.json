@@ -1,0 +1,14 @@
+{
+  "name": "revuex",
+  "version": "0.0.4",
+  "description": "",
+  "main": "dist/revuex.common.js",
+  "scripts": {
+  },
+  "author": "Bruce Chao",
+  "license": "MIT",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
