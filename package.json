@@ -1,6 +1,6 @@
 {
   "name": "revuex",
-  "version": "0.0.5",
+  "version": "0.0.9",
   "description": "",
   "main": "dist/revuex.common.js",
   "scripts": {},

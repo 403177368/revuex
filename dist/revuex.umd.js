@@ -1,3 +1,7 @@
+/*
+ * Revuex v0.0.9 
+ * Released under the MIT License.
+ */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -163,6 +167,9 @@
         }
 
         self.reducer = function (state, action) {
+          if (self.isRoot) {
+            console.log('\nReducing: ' + action.type);
+          }
           if (state === void 0) {
             state = self.initialState;
           }
@@ -197,8 +204,8 @@
             // if (path === 'item') {
             //   console.log(self.path + ' indexState', indexState);
             // }
-            console.log('path: ', path);
-            console.log('reducing: ' + action.type);
+            // console.log('path: ', path);
+            // console.log('reducing: ' + action.type);
 
             if (path === self.path) {
               console.log('[revuex] path \'' + path + '\' matched action: ' + action.type);
@@ -260,13 +267,17 @@
       this._rootModule = new Module([], options, this);
       this._reduxStore = this.redux.createStore(this._rootModule.reducer, undefined);
       this.getState = this._reduxStore.getState;
+      this.subscribe = this._reduxStore.subscribe;
+      // Object.assign(this, this._reduxStore);
     }
+    // Invoke an action-creator
+
 
     createClass(Store, [{
       key: 'invoke',
       value: function invoke(path, payload) {
         var self = this;
-        console.log('[revuex] running action creator: ' + path);
+        console.log('[revuex] Invoking action creator: ' + path);
         if (!this._creatorsMap[path]) {
           throw new Error('[revuex] Unknown action creator: ' + path + '.');
         }
@@ -293,7 +304,8 @@
             } else {
               // Complete the action type:
               // Make this action a global action:
-              action.type = (modulePath === '' ? '' : '/') + key;
+              // console.log('\n' + modulePath);
+              action.type = (modulePath === '' ? '' : modulePath + '/') + key;
               return self._reduxStore.dispatch(action);
             }
           }
@@ -327,6 +339,8 @@
 
         return self._creatorsMap[path](ctx, payload);
       }
+      // Dispatch an action
+
     }, {
       key: 'dispatch',
       value: function dispatch(path) {
@@ -336,11 +350,15 @@
         action.type = path;
         this._reduxStore.dispatch(action);
       }
+      // Ensure the given module is installed to the given path
+
     }, {
       key: 'ensure',
       value: function ensure(pathArr, rawModule) {
         this.registerModule(pathArr, rawModule);
       }
+      // Register a module to the given path
+
     }, {
       key: 'registerModule',
       value: function registerModule(pathArr, rawModule) {
@@ -349,7 +367,7 @@
         }
         var path = pathArr.join('/');
         if (!this.modulesMap[path]) {
-          console.log('[revuex] registering module ' + path);
+          console.log('[revuex] Registering module ' + path);
           var module = new Module(pathArr, rawModule, this);
           // Update this module's ancestors' internalReducer and reducer:
           while (module.parent) {
@@ -366,6 +384,7 @@
   }();
 
   // Organize your react/redux application in the vuex way.
+
   /*
   API Reference
     createStore(options): Store
@@ -376,6 +395,11 @@
     	dispatch(path: string, payload)
   */
 
+  /**
+   * Create a revuex store.
+   * @param {Object}
+   * @returns 
+   */
   function createStore(options) {
     return new Store(options);
   }
