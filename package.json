@@ -1,7 +1,8 @@
 {
   "name": "revuex",
-  "version": "0.0.9",
-  "description": "",
+  "version": "0.0.10",
+  "description": "A front-end state manager",
+  "repository": "https://github.com/403177368/revuex",
   "main": "dist/revuex.common.js",
   "scripts": {},
   "author": "Bruce Chao",

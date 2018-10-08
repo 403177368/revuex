@@ -1,5 +1,5 @@
 /*
- * Revuex v0.0.9 
+ * Revuex v0.0.11 
  * Released under the MIT License.
  */
 (function (global, factory) {

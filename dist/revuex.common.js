@@ -1,3 +1,7 @@
+/*
+ * Revuex v0.0.11 
+ * Released under the MIT License.
+ */
 'use strict';
 
 function use(ref) {
